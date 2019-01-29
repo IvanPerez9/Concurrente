@@ -30,6 +30,7 @@ public class Introduccion {
 			public void run() {
 				for (int i = 0; i < 5; i++) {
 					System.out.println("XXX");
+					sleep();
 				}
 			}
 		});
@@ -38,6 +39,7 @@ public class Introduccion {
 			public void run() {
 				for (int i = 0; i < 5; i++) {
 					System.out.println("---");
+					sleep();
 				}
 				
 			}
@@ -48,6 +50,7 @@ public class Introduccion {
 			public void run() {
 				for (int i = 0; i < 5; i++) {
 					System.out.println("***");
+					sleep();
 				}
 				
 			}
@@ -58,5 +61,13 @@ public class Introduccion {
 		th3.start();
 	}
 	
+	private static void sleep() {
+		try {
+			Thread.sleep(1);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	}
 	
 }

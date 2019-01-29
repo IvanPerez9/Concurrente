@@ -11,13 +11,18 @@ package Introduccion;
  */
 public class Introduccion2  {
 	
-	static int n = 10;
+	public static int n;
 
-	public static void metodo1()  throws InterruptedException {
+	
+	public static void main(String[] args) throws InterruptedException {
+		
+		n = 10;
+		
 		Thread th1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				n += 1;
+				System.out.println(n);
 				try {
 					Thread.sleep(1);
 				} catch (InterruptedException e) {
@@ -25,6 +30,11 @@ public class Introduccion2  {
 				}
 			}
 		});
-	}
-	
+		
+		th1.start();
+		
+		new Thread(() -> n-= 1).start();
+		System.out.println(n);
+		
+	} 	
 }
