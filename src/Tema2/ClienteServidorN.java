@@ -11,7 +11,7 @@ import java.util.Random;
  *  https://github.com/IvanPerez9
  */
 
-public class ClienteServidor {
+public class ClienteServidorN {
 	
 	/*
 	 * Diferencia con el anterior es que el cliente le dice al servidor cuando le tiene que servir
