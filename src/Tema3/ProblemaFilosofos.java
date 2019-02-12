@@ -1,0 +1,102 @@
+/**
+ * 
+ */
+package Tema3;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.Semaphore;
+
+/**
+ * @author Ivan.Perez
+ *
+ *  https://github.com/IvanPerez9
+ *  
+ *  PROBLEMA DE EM ENTONCES PERMISOS DEL SEMAFORO = 1
+ *  SI ES DE SINCRONIZACION CONDICIONAL ENTONCES PERMISOS = 0
+ *  
+ */
+public class ProblemaFilosofos extends Thread {
+		private int numPhil;
+		private int leftFork;
+		private int rightFork;
+		private Semaphore[] semFork;
+
+		private static void sleep(int bound) {
+			try {
+				Thread.sleep(new Random().nextInt(bound));
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		public ProblemaFilosofos(String name, int numPhil, Semaphore[] semFork) {
+			super(name); // Extends de Thread para usar Super con el nombre del semáforo
+			this.numPhil = numPhil;
+			this.semFork = semFork;
+			this.leftFork = numPhil;
+			this.rightFork = (numPhil + 1) % semFork.length; // cola circular
+		}
+
+		public void eat() {
+			// Intenta comer si los dos palillos estan libres
+			try {
+				semFork[leftFork].acquire();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			try {
+				semFork[rightFork].acquire();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			System.out.println("Filosofo: " + numPhil + " comiendo");
+			sleep(1500);
+			System.out.println("Filosofo: " + numPhil + " ha terminado de comer");
+			semFork[rightFork].release();
+			semFork[leftFork].release();
+		}
+
+		public void think() {
+			System.out.println("Filosofo: " + numPhil + " pensando");
+			sleep(2000);
+			System.out.println("Filosofo: " + numPhil + " ha terminado de pensar");
+		}
+
+		@Override
+		public void run() {
+			while (true) {
+				eat();
+				think();
+			}
+		}
+
+		//// MAIN
+
+		private static final int NUMFILOSOFOS = 5;
+
+		public static void main(String[] args) throws InterruptedException {
+			Semaphore[] semForks = new Semaphore[NUMFILOSOFOS]; // null pointer
+																// hay que inicializar cada uno de los semaforos
+																// Tantos como filosofos haya
+			for (int i = 0; i < NUMFILOSOFOS; i++) {
+				semForks[i] = new Semaphore(1);
+			}
+
+			List<Thread> ths = new ArrayList<>();
+
+			for (int i = 0; i < NUMFILOSOFOS; i++) {
+				ProblemaFilosofos ph = new ProblemaFilosofos("Philo" + i, i, semForks);
+				ths.add(ph);
+				ph.start();
+			}
+
+			for (Thread th : ths) {
+				th.join();
+			}
+
+		}
+	
+}
