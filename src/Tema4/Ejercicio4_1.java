@@ -51,9 +51,10 @@ public class Ejercicio4_1 {
 					e.printStackTrace();
 				}
 				if (contador == 5) {
-					System.out.println("Cansado de esperar");
+					System.out.println("\nCansado de esperar");
 					hiloMensajes.interrupt();
-					// Hago el join para esperar que termine y no interrumpirle a la mitad 
+					// Hago el join para esperar que termine y no interrumpirle a la mitad .
+					// Junto con el interrupt -> Cuando puedas parate
 					try {
 						hiloMensajes.join();
 					} catch (InterruptedException e) {
