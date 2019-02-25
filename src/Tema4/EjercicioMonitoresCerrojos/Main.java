@@ -25,13 +25,38 @@ public class Main {
 			int id = i+1;
 			ths.add(new Thread(() ->  {
 				try {
-					monitor.startMantenimiento("mantenimiento");
+					monitor.startMantenimiento("mantenimiento" + id);
 					Thread.sleep(1000);
-					monitor.stoptMantenimiento("para mantenimiento");
+					monitor.stoptMantenimiento("para mantenimiento" + id);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}));
+		}
+		
+		for (int i = 0; i < nReq; i++) {
+			int id2 = i+1;
+			ths.add(new Thread(() ->  {
+				try {
+					monitor.startMantenimiento("request" + id2);
+					Thread.sleep(1000);
+					monitor.stoptMantenimiento("para mantenimiento" + id2);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}));
+		}
+		
+		for (Thread th : ths) {
+			th.start();
+		}
+		
+		for (Thread th : ths) {
+			try {
+				th.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
