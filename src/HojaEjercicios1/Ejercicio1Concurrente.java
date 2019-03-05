@@ -31,23 +31,16 @@ public class Ejercicio1Concurrente {
 	    int filas = a.length;
 	    int columnas = b[0].length;
 	    int [][] resultado = new int[filas][columnas];
-
-//        for (int fila=0; fila<filas; fila++) {
-//            for (int columna=0; columna<columnas; columna++)
-//            {
-//                Thread hilo = new Thread(() ->  multiplicarMatriz(a,b,resultado,fila,columna));
-//                ths.add(hilo);
-//                hilo.start();
-//            }
-//        }
 	    
-	    for (int fila=0; fila<filas; fila++)
-            for (int columna=0; columna<columnas; columna++)
-            {
-                Thread th = new Thread( new Hilo(a,b,resultado,fila,columna));
+	    for (int fila=0; fila<filas; fila++) {
+	    	int filaFinal = fila;
+            for (int columna=0; columna<columnas; columna++){
+            	int columnaFinal =  columnas;
+                Thread th = new Thread( new Hilo(a,b,resultado,filaFinal,columnaFinal));
                 ths.add(th);
                 th.start();
             }
+	    }
         
         for (Thread th : ths) {
 			try {
@@ -62,6 +55,7 @@ public class Ejercicio1Concurrente {
 	    long endTime = System.nanoTime() - startTime;
 	    System.out.println("En milisegundos: " + (endTime)/1e6 );
 	}
+}
 	
 	class Hilo implements Runnable{
 		
@@ -93,5 +87,3 @@ public class Ejercicio1Concurrente {
 		}
 		
 	}
-	
-}

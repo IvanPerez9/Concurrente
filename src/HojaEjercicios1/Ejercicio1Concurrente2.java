@@ -33,9 +33,11 @@ public class Ejercicio1Concurrente2 {
 	    int [][] resultado = new int[filas][columnas];
 
         for (int fila=0; fila<filas; fila++) {
+        	int filaFinal = fila;
             for (int columna=0; columna<columnas; columna++)
             {
-                Thread hilo = new Thread(() ->  multiplicarMatriz(a,b,resultado,fila,columna));
+            	int columnaFinal = columna;
+                Thread hilo = new Thread(() ->  multiplicarMatriz(a,b,resultado,filaFinal,columnaFinal));
                 ths.add(hilo);
                 hilo.start();
             }
