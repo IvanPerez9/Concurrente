@@ -3,6 +3,8 @@
  */
 package EjerciciosRepaso;
 
+import java.util.concurrent.Exchanger;
+
 /**
  * @author Ivan.Perez
  *
@@ -17,5 +19,41 @@ public class ProductorConsumidorIntercambiadorRepaso {
 	 * El primer hilo queda bloqueado hasta que ambos ejecutan el metodo exchange() , despues ambos intercambian los valores pasado por parametros
 	 * Es un metodo bloqueante asi que eleva excepcion
 	 */
+	
+	static Exchanger<Double> intercambiador = new Exchanger<>();
+	static final int VALOR = 10;
+	
+	public static void productor() {
+		try {
+			double producto = 0;
+			for (int i = 0; i < VALOR; i++) {
+				producto ++;
+				Thread.sleep(500);
+				intercambiador.exchange(producto); // Intercambia el valor de la variable cada vez que llega al exchange
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void consumidor () {
+		try {
+			for (int i = 0; i < VALOR; i++) {
+				double producto = intercambiador.exchange(null); // Ambos tienen que llegar a "exchange" el consumidor no devuelve nada
+				System.out.println("Producto " + producto);
+				Thread.sleep(500);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		Thread th1 = new Thread (() -> productor() );
+		Thread th2 = new Thread(() -> consumidor());
+		
+		th1.start();
+		th2.start();
+	}
 	
 }
