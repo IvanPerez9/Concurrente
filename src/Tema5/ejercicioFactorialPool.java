@@ -38,21 +38,21 @@ public class ejercicioFactorialPool {
 		ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 		int max = 1000000;
 		// Cambiarlo por un concurrent hashmap de integer y future big integer
-		ConcurrentHashMap<Integer, Future<BigInteger>> resultsM = new ConcurrentHashMap<>();
+		ConcurrentHashMap<Integer, Future<BigInteger>> results = new ConcurrentHashMap<>();
 		for (int i = 0; i < max; i++) {
-			int n = i;
-			resultsM.add(pool.submit(() -> factorial(n)));
+			int n = i+1;
+			results.put(pool.submit(() -> factorial(n)));
 		}
 		
 		// Aqui recorrer con getValues y el keySet()
-		while(!resultsM.isEmpty()) {
-			for (Entry<Integer, Future<BigInteger>> entry : resultsM.entrySet()) {
-				Future<BigInteger> results = entry.getValue();
+		while(!results.isEmpty()) {
+			for (Map.Entry<Integer,Future<BigInteger>> val : results.entrySet()) {
+				BigInteger result = val.getValue().get();
 			}
-			for (Future<BigInteger> future : resultsM) {
+			for (Future<BigInteger> future : results) {
 				if (future.isDone()) {
 					System.out.println(future.get());
-					resultsM.remove(future);
+					results.remove(future);
 				}
 			}
 		}
