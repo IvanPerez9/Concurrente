@@ -27,6 +27,7 @@ public class ejercicioFicheroVocalesPool {
 		String line = null;
 		List<Future<Integer>> results = new ArrayList<>();
 		int contador = 0;
+		// Parser
 		while((line = entrada.readLine()) != null) {
 			String[] words = line.split(" "); //"\\s+"  La expresion regular del espacio
 			for (String w : words) {
