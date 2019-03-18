@@ -28,7 +28,6 @@ public class Ejercicio2Concurrente {
 	public static void main(String[] args) {
 		Scanner entrada = new Scanner (System.in);
 		StringBuilder frase = new StringBuilder(entrada.nextLine());
-		int salida = 1;
 		
 		LinkedList<Thread> ths = new LinkedList<Thread>();
 		for (int j = 0; j < frase.length(); j++) {

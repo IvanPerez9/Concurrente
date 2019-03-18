@@ -29,13 +29,16 @@ public class ejercicioWebSchedulePool {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println(mensajeSalida);
 	}
 
 	
 	public static void main(String[] args) {
 		ScheduledExecutorService pool = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
 		
-		pool.scheduleWithFixedDelay(() -> tarea("www.google.com") , 0, 5, TimeUnit.SECONDS);
-		pool.scheduleWithFixedDelay(() -> tarea("www.noexistw94082.es") , 0, 5, TimeUnit.SECONDS);
+		pool.scheduleWithFixedDelay(() -> tarea("https://www.google.com/") , 0, 5, TimeUnit.SECONDS);
+		pool.scheduleWithFixedDelay(() -> tarea("https://www.noexistw94082.es/") , 0, 5, TimeUnit.SECONDS);
+		
+		pool.shutdown();
 	}
 }
