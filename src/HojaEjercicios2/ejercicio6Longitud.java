@@ -25,7 +25,6 @@ public class ejercicio6Longitud {
 	 * 		• [ "", "", "cse", "rox", "", "homework", "", "7", "" ]
 	 * 		• [ 3, 3, 8, 1]
 	 * 
-	 * TODO Fix ejercicio 6 -> Pasar un array e imprimir el array
 	 */
 	
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
