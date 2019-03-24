@@ -33,8 +33,8 @@ public class ejercicio1MergeSort extends RecursiveAction {
 		int[] arr1 = Arrays.copyOfRange(array, 0, mid);
 		int[] arr2 = Arrays.copyOfRange(array, mid, array.length);
 		if (array.length < SIZE) {
-			sortMerge(array);
-			sortMerge(array);
+			mergeSort(array);
+			mergeSort(array);
 		} else {
 			invokeAll(new ejercicio1MergeSort(arr1), new ejercicio1MergeSort(arr2));
 			merge(array, arr1, arr2);
@@ -62,15 +62,15 @@ public class ejercicio1MergeSort extends RecursiveAction {
 		}
 	}
 
-	public void sortMerge(int[] arr) {
+	public void mergeSort (int[] arr) {
 		if (arr.length < 2) {
 			return;
 		}
 		int mid = arr.length / 2;
 		int[] arr1 = Arrays.copyOfRange(arr, 0, mid);
 		int[] arr2 = Arrays.copyOfRange(arr, mid, arr.length);
-		sortMerge(arr1);
-		sortMerge(arr2);
+		mergeSort(arr1);
+		mergeSort(arr2);
 		merge(arr, arr1, arr2);
 	}
 
