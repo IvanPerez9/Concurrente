@@ -20,6 +20,7 @@ public class ejercicio9Sequencia {
 
 	private static final int N = 5;
 	
+	// TODO : Fix salida
 
 	public static int[] generateRandomArray (int size) {
 		int[] aux = new int[size];
