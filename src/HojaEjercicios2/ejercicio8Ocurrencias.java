@@ -41,19 +41,19 @@ public class ejercicio8Ocurrencias {
 	public static void main(String[] args) throws FileNotFoundException, InterruptedException, ExecutionException {
 		ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 		String path = "big_file.txt" ;
-		Map<Future<Integer>,String> mapa = new HashMap<>();
+		Map<String,Future<Integer>> mapa = new HashMap<>();
 		BufferedReader file = new BufferedReader(new FileReader(path));
 		
 		for (int i = 0; i < SIZE; i++) {
 			final int finalI = i;
 			Future<Integer> aux = pool.submit(() -> contarPalabras(arrayStrings[finalI], file));
-			mapa.put(aux , arrayStrings[finalI]);
+			mapa.put(arrayStrings[finalI], aux);
 		}
 		
-		for (Future<Integer> map : mapa.keySet()) {
-			Integer key = map.get();
-			String value = mapa.get(map);
-			System.out.println("Value: " + key + "  ->   Word: " + value);
+		for (String map2 : mapa.keySet()) {
+			String key = map2;
+			Integer value = mapa.get(map2).get();
+			System.out.println("Key: " + key + " ->  Word: " + value);
 		}
 		
 		pool.shutdown();

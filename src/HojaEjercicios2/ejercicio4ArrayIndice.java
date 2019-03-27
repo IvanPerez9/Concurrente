@@ -18,11 +18,9 @@ import java.util.concurrent.Future;
  */
 public class ejercicio4ArrayIndice {
 
-	private static final int SIZE = 10;
-
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-		int [] array = generateArray(SIZE); // Si no uso un array de prueba
+		//int [] array = generateArray(SIZE); // Si no uso un array de prueba
 		List<Future<Integer>> list = new ArrayList<>();
 		Future<Integer> numero = null;
 		int[] arrayPrueba = {6,1,5,7,4,8,6,8,8,10} ;
