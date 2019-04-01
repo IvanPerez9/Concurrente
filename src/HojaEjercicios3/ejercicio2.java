@@ -18,8 +18,8 @@ import java.util.stream.Stream;
  *
  *  https://github.com/IvanPerez9
  */
-public class ejercicio1 {
-	
+public class ejercicio2 {
+
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		Path path = Paths.get("database.csv");
 		List<String> filas = new ArrayList<String>();
@@ -34,24 +34,6 @@ public class ejercicio1 {
 			for (String string : filas) {
 				System.out.println(string);
 			}
-			
-			// Lee todo
-//			List<List<String>> valores = lines
-//					.map(line -> Arrays.asList(line.split(";")))
-//					.collect(Collectors.toList());
-//			
-//			valores.forEach(valor -> System.out.println(valor));
-			
-			//Lee primera linea
-//			columnas = lines
-//					.parallel()
-//					.findFirst()
-//					.map(p -> Arrays.asList(p.split(";")))
-//					.get();
-//			
-//			for (String string : columnas) {
-//				System.out.println(string);
-//			}
 		}
 	}
 	
