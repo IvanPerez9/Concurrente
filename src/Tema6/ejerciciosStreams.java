@@ -50,8 +50,7 @@ public class ejerciciosStreams {
 		// Obtener el menor numero -> Si no uso el get, se vuelve un Optional<Integer> 
 		
 		Integer numero = lista.stream()
-			.min(Comparator.comparing(Integer::valueOf))
-			.get();
+			.min(Comparator.comparing(Integer::valueOf)).get();
 		
 		System.out.println("Minimo: " + numero);	
 		
