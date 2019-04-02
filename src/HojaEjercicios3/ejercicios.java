@@ -130,6 +130,56 @@ public class ejercicios {
 		System.out.println("Name: " + name + " Popularidad: " + popuL);
 	}
 	
+	/*
+	 * Ejercicio8 -> Recibir un dominio e imprima todos los personajes
+	 */
+	public static void ejercicio8 (List<String[]> file, String dominio) {
+		List<String> personajes = file.parallelStream()
+								.filter(p -> p[8].equals(dominio))
+								.map(m -> m[0])
+								.collect(Collectors.toList());
+		
+		System.out.println("En la base de datos: ");
+		for (String s : personajes) {
+			System.out.println(s + ",");
+		}
+		System.out.println("Pertenece al dominio de " + dominio);
+	}
+	
+	/*
+	 * Ejercicio9 -> Por cada industria que ocupaciones tienen TODO
+	 */
+	public static void ejercicio9 (List<String[]> file) {
+		file.parallelStream()
+			.map(m -> m[12]);
+	}
+	
+	/*
+	 * Ejercicio11 -> Mostrar por longitud de nombre, nombre y ocupacion
+	 */
+	public static void ejercicio11 (List<String[]> file, int longitud) {
+		file.stream()
+					.filter(p -> p[0].length() == longitud)
+					.forEach(p -> {
+						System.out.println("Name " + p[0] + " Occupation: " + p[6] );
+					});
+		
+	}
+	
+	/*
+	 * Ejercicio13 -> Ordenar por longitud de nombre
+	 */
+	public static void ejercicio13 (List<String[]> file) {
+		
+		Comparator<String> comparador = (a,b) -> a.length() - b.length();
+		
+		file.stream()
+					.map(m -> m[0])
+					.sorted(comparador)
+					.forEach(System.out::println);
+		
+	}
+	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		Path path = Paths.get("database.csv");
 		List<String[]> fichero = leerFichero(path);
@@ -140,7 +190,12 @@ public class ejercicios {
 		//ejercicio4 (fichero);
 		//ejercicio5 (fichero); -> Ver como funciona bien
 		//ejercicio6(fichero, "Philosopher"); -> MAL
-		ejercicio7(fichero);
+		//ejercicio7(fichero);
+		//ejercicio8(fichero, "Institutions");
+		
+		ejercicio11(fichero, 5);
+		
+		//ejercicio13(fichero); -> Con parallel Stream va mal OJO
 	}
 	
 }
