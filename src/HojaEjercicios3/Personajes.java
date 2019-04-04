@@ -24,14 +24,13 @@ public class Personajes {
 	private Integer average;
 	private Integer popularity;
 	
-	
-//	@Override
-//	public String toString() {
-//		return "Personajes [name=" + name + ", sex=" + sex + ", birth=" + birth + ", city=" + city + ", country="
-//				+ country + ", continent=" + continent + ", occupation=" + occupation + ", industry=" + industry
-//				+ ", domain=" + domain + ", languajes=" + languajes + ", views=" + views + ", average=" + average
-//				+ ", popularity=" + popularity + "]";
-//	}
+	@Override
+	public String toString() {
+		return "Personajes [name=" + name + ", sex=" + sex + ", birth=" + birth + ", city=" + city + ", country="
+				+ country + ", continent=" + continent + ", occupation=" + occupation + ", industry=" + industry
+				+ ", domain=" + domain + ", languajes=" + languajes + ", views=" + views + ", average=" + average
+				+ ", popularity=" + popularity + "]";
+	}
 	
 	/**
 	 * @param name

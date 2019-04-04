@@ -23,7 +23,7 @@ public class ejercicioTema6 {
 	public static void main(String[] args) throws IOException {
 		String path = "File2.txt" ;
 		Long start = System.currentTimeMillis();
-		crearFichero(M, N, path);
+		//crearFichero(M, N, path);
 		
 		try (BufferedReader entrada = new BufferedReader(new FileReader(path))) {
 			Optional<Float> maxVal = entrada.lines() // Reduce devuelve un optional
