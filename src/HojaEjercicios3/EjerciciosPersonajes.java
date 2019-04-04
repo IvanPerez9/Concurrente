@@ -7,10 +7,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
+
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 /**
  * @author Ivan.Perez
@@ -21,22 +23,23 @@ public class EjerciciosPersonajes {
 
 	private List<Personajes> personajes;
 
-	public List<Personajes> getPersonajes() {
-		return personajes;
-	}
-
-	public void setPersonajes(List<Personajes> personajes) {
-		this.personajes = personajes;
-	}
-
-	public EjerciciosPersonajes (String path) throws FileNotFoundException, IOException {
-		this.personajes = new ArrayList<>();
+	/**
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 * 
+	 */
+	public EjerciciosPersonajes(String path) throws FileNotFoundException, IOException {
+		personajes = new ArrayList<>();
+		
 		try (BufferedReader bf = new BufferedReader(new FileReader(path))) {
-			this.personajes = bf.lines()
+			personajes = bf.lines()
 					.skip(1)
 					.map(line -> line.trim().split(";"))
 					.filter(line -> line.length == 12)
-					.map(col -> new Personajes (
+					.map((col -> {
+						Personajes personaje = null;
+						try {
+							personaje = new Personajes(
 									col[0],
 									col[1],
 									Integer.parseInt(col[2]),
@@ -49,28 +52,16 @@ public class EjerciciosPersonajes {
 									Integer.parseInt(col[9]),
 									Integer.parseInt(col[10]),
 									Integer.parseInt(col[11]),
-									Integer.parseInt(col[12]))
-					)
-					.filter(Objects::nonNull)
-					.collect(Collectors.toList());
+									Integer.parseInt(col[12]));
+						} catch (ParseException e) {
+							return e;
+						}
+						return personaje;
+					})
+					.collect(Collectors.toList()));
 		}
 	}
 	
-	/*
-	 * Ejercicio 1 -> Sacar el nombre de todos
-	 */
-	public void ejercicio1 () {
-		this.personajes.parallelStream()
-				.map(m -> m.getName())
-				.forEach(System.out::println);
-	}
-	
-	public static void main(String[] args) throws FileNotFoundException, IOException {
-		String path = "database.csv" ;
-		EjerciciosPersonajes ejPersonaje = new EjerciciosPersonajes(path);
-		System.out.println(ejPersonaje.personajes);
-		ejPersonaje.ejercicio1();
-	}
 	
 	
 }

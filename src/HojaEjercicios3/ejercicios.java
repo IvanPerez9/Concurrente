@@ -161,7 +161,7 @@ public class ejercicios {
 		file.stream()
 					.filter(p -> p[0].length() == longitud)
 					.forEach(p -> {
-						System.out.println("Name: " + p[0] + " Occupation: " + p[6] );
+						System.out.println("Name " + p[0] + " Occupation: " + p[6] );
 					});
 		
 	}
