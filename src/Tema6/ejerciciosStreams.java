@@ -91,6 +91,23 @@ public class ejerciciosStreams {
 		listaPalabras.stream()
 			.filter(p -> p.contains("a"))
 			.forEach(p -> System.out.println("Contiene la a: " + p));
+		
+		/* Longitud maxima
+		 * 
+		 * Reduce operation applies a binary operator to each element in the stream
+		 * where the first argument to the operator is the return value of the previous application and second argument is the current stream element.
+		 * sum(), min(), max(), count() etc. are some examples of reduce operations. reduce() explicitly asks you to specify how to reduce the data that made it through the stream.
+		 */
+		
+		String palabraL = listaPalabras.stream()
+			.max(Comparator.comparingInt(String::length))
+			.get();
+		System.out.println(palabraL);
+		
+		String palabraLL = listaPalabras.stream()
+				.reduce((palabra1,palabra2) -> palabra1.length() > palabra2.length() ? palabra1 : palabra2)
+				.get();
+		System.out.println(palabraLL);
 	}
 	
 }
