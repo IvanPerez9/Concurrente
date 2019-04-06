@@ -53,6 +53,16 @@ public class EjerciciosPersonajes {
         }
     }
 	
+	public void ejercicio1 () {
+		this.personajes.parallelStream()
+				.map(p -> p.getName())
+				.forEach(p -> System.out.println(p));
+	}
 	
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+		EjerciciosPersonajes ejercicios = new EjerciciosPersonajes("database.csv");
+		
+		ejercicios.ejercicio1();
+	}
 	
 }
