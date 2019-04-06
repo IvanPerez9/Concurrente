@@ -23,7 +23,7 @@ public class NumeroAleatoriosInterrupt {
 
 	public static void generarNumeros () {
 		try {
-			PrintWriter escribirFichero = new PrintWriter("salida.txt");
+			PrintWriter escribirFichero = new PrintWriter("Resources/salida.txt");
 			while(true) {
 				BigInteger numero = BigInteger.probablePrime(1024, new Random ());
 				escribirFichero.println (numero.toString());

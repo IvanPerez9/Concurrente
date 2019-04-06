@@ -181,7 +181,7 @@ public class ejercicios {
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		Path path = Paths.get("database.csv");
+		Path path = Paths.get("Resources/database.csv");
 		List<String[]> fichero = leerFichero(path);
 		
 		//ejercicio1(fichero);

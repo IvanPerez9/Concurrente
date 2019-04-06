@@ -21,7 +21,7 @@ public class ejercicioTema6 {
 	private final static int N = 5000;
 
 	public static void main(String[] args) throws IOException {
-		String path = "File2.txt" ;
+		String path = "Resources/File2.txt" ;
 		Long start = System.currentTimeMillis();
 		crearFichero(M, N, path);
 		

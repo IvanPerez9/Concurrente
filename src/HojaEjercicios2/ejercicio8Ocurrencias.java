@@ -40,7 +40,7 @@ public class ejercicio8Ocurrencias {
 	
 	public static void main(String[] args) throws FileNotFoundException, InterruptedException, ExecutionException {
 		ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-		String path = "big_file.txt" ;
+		String path = "Resources/big_file.txt" ;
 		Map<String,Future<Integer>> mapa = new HashMap<>();
 		BufferedReader file = new BufferedReader(new FileReader(path));
 		

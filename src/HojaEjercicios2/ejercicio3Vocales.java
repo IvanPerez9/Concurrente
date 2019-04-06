@@ -22,7 +22,7 @@ public class ejercicio3Vocales {
 
 	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
 		ExecutorService pool = Executors.newCachedThreadPool();
-		String path = "big_file.txt" ;
+		String path = "Resources/big_file.txt" ;
 		BufferedReader entrada = new BufferedReader(new FileReader(path));
 		String linea = null;
 		List<Future<Integer>> lista = new ArrayList<>();

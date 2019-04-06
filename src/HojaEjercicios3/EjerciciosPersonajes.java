@@ -60,7 +60,7 @@ public class EjerciciosPersonajes {
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		EjerciciosPersonajes ejercicios = new EjerciciosPersonajes("database.csv");
+		EjerciciosPersonajes ejercicios = new EjerciciosPersonajes("Resources/database.csv");
 		
 		ejercicios.ejercicio1();
 	}

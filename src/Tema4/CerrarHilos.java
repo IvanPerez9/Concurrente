@@ -18,7 +18,7 @@ public class CerrarHilos {
 
 	public static void generateNumbers() {
 		try {
-			PrintWriter writer = new PrintWriter("output.txt");
+			PrintWriter writer = new PrintWriter("Resources/output.txt");
 			while (true) {
 				// numero primo aleatorio
 				BigInteger prime = BigInteger.probablePrime(1024,new Random());
