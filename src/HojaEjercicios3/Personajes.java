@@ -12,26 +12,26 @@ public class Personajes {
 
 	private String name;
 	private String sex;
-	private Integer birth;
+	private String birth;
 	private String city;
 	private String country;
 	private String continent;
 	private String occupation;
 	private String industry;
 	private String domain;
-	private Integer languajes;
-	private Integer views;
-	private Integer average;
-	private Integer popularity;
+	private Double languajes;
+	private Double views;
+	private Double average;
+	private Double popularity;
 	
 	
-//	@Override
-//	public String toString() {
-//		return "Personajes [name=" + name + ", sex=" + sex + ", birth=" + birth + ", city=" + city + ", country="
-//				+ country + ", continent=" + continent + ", occupation=" + occupation + ", industry=" + industry
-//				+ ", domain=" + domain + ", languajes=" + languajes + ", views=" + views + ", average=" + average
-//				+ ", popularity=" + popularity + "]";
-//	}
+	@Override
+	public String toString() {
+		return "Personajes [name=" + name + ", sex=" + sex + ", birth=" + birth + ", city=" + city + ", country="
+				+ country + ", continent=" + continent + ", occupation=" + occupation + ", industry=" + industry
+				+ ", domain=" + domain + ", languajes=" + languajes + ", views=" + views + ", average=" + average
+				+ ", popularity=" + popularity + "]";
+	}
 	
 	/**
 	 * @param name
@@ -48,9 +48,9 @@ public class Personajes {
 	 * @param average
 	 * @param popularity
 	 */
-	public Personajes(String name, String sex, Integer birth, String city, String country, String continent,
-			String occupation, String industry, String domain, Integer languajes, Integer views, Integer average,
-			Integer popularity) {
+	public Personajes(String name, String sex, String birth, String city, String country, String continent,
+			String occupation, String industry, String domain, Double languajes, Double views, Double average,
+			Double popularity) {
 		super();
 		this.name = name;
 		this.sex = sex;
@@ -78,10 +78,10 @@ public class Personajes {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public Integer getBirth() {
+	public String getBirth() {
 		return birth;
 	}
-	public void setBirth(Integer birth) {
+	public void setBirth(String birth) {
 		this.birth = birth;
 	}
 	public String getCity() {
@@ -120,31 +120,31 @@ public class Personajes {
 	public void setDomain(String domain) {
 		this.domain = domain;
 	}
-	public Integer getLanguajes() {
+	public Double getLanguajes() {
 		return languajes;
 	}
-	public void setLanguajes(Integer languajes) {
+	public void setLanguajes(Double languajes) {
 		this.languajes = languajes;
 	}
-	public Integer getViews() {
+	public Double getViews() {
 		return views;
 	}
-	public void setViews(Integer views) {
+	public void setViews(Double views) {
 		this.views = views;
 	}
-	public Integer getAverage() {
+	public Double getAverage() {
 		return average;
 	}
-	public void setAverage(Integer average) {
+	public void setAverage(Double average) {
 		this.average = average;
 	}
-	public Integer getPopularity() {
+	public Double getPopularity() {
 		return popularity;
 	}
-	public void setPopularity(Integer popularity) {
+	public void setPopularity(Double popularity) {
 		this.popularity = popularity;
 	}
-	
-	
+
 	
 }
+

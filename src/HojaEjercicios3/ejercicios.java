@@ -74,7 +74,7 @@ public class ejercicios {
 	}
 	
 	/*
-	 * Ejercicio 4 -> imprimir nombre y año de nacimiento de todos los Europeos que nacieron antes del año 0
+	 * Ejercicio 4 -> imprimir nombre y aï¿½o de nacimiento de todos los Europeos que nacieron antes del aï¿½o 0
 	 * 
 	 * DUDA -> SI NO LO HAGO CON EL "-" COMO ? 
 	 */
@@ -111,7 +111,7 @@ public class ejercicios {
 	}
 	
 	/*
-	 * Ejercicio 7 -> Nombre y popularidad del más popular
+	 * Ejercicio 7 -> Nombre y popularidad del mï¿½s popular
 	 */
 	public static void ejercicio7 (List<String[]> file) {
 		List<Integer> popuL = file.parallelStream()
@@ -176,6 +176,7 @@ public class ejercicios {
 		file.stream()
 					.map(m -> m[0])
 					.sorted(comparador)
+					.sequential()        // La impresion tiene que ser secuencial, si no imprime sin orden
 					.forEach(System.out::println);
 		
 	}
@@ -186,16 +187,17 @@ public class ejercicios {
 		
 		//ejercicio1(fichero);
 		//ejercicio2(fichero , "F");
-		//ejercicio3 (fichero);
+		ejercicio3 (fichero);
 		//ejercicio4 (fichero);
 		//ejercicio5 (fichero); -> Ver como funciona bien
 		//ejercicio6(fichero, "Philosopher"); -> MAL
 		//ejercicio7(fichero);
 		//ejercicio8(fichero, "Institutions");
 		
-		ejercicio11(fichero, 5);
+		//ejercicio11(fichero, 5);
 		
 		//ejercicio13(fichero); -> Con parallel Stream va mal OJO
 	}
 	
 }
+
