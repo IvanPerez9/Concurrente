@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -163,12 +162,12 @@ public class EjerciciosPersonajes {
 	 * Implementa un método que imprima por pantalla por cada industria,
 	 * qué ocupaciones aparecen en el fichero -> Agrupar por industria
 	 */
-	public void ejercicio9 () {
-		this.personajes.parallelStream()
-			.collect()
-			.distinct();
-			
-	}
+//	public void ejercicio9 () {
+//		this.personajes.parallelStream()
+//			.collect()
+//			.distinct();
+//			
+//	}
 	
 	/*
 	 * Implementa un método que reciba como argumento una cadena de caracteres
@@ -232,7 +231,7 @@ public class EjerciciosPersonajes {
 		
 		// El 9 el formato de salida
 		
-		//ejercicios.ejercicios10("aba");
+		ejercicios.ejercicios10("aba");
 		//ejercicios.ejercicio11(3);
 		//ejercicios.ejercicio13();
 	}
