@@ -19,6 +19,8 @@ public class MonitorSyncronized {
 	
 	/*
 	 * IMPORTANTE ACORDARSE DE SYNCRONIZED EN LOS METODOS Y DE WAIT/NOTIFYALL
+	 * Y OJO CON EL WAIT -> ACTIVACIONES INESPERADAS
+	 * 					 -> Realizarlas dentro de un while siempre !!!!!!! 
 	 */
 	
 	private static final int PRIZE = 100;

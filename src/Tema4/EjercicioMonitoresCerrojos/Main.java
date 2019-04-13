@@ -38,9 +38,9 @@ public class Main {
 			int id2 = i+1;
 			ths.add(new Thread(() ->  {
 				try {
-					monitor.startMantenimiento("request" + id2);
+					monitor.startWeb("request" + id2);
 					Thread.sleep(1000);
-					monitor.stoptMantenimiento("para mantenimiento" + id2);
+					monitor.stoptWeb("para mantenimiento" + id2);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
