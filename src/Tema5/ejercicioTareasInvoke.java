@@ -37,10 +37,13 @@ public class ejercicioTareasInvoke {
 		
 		// Hasta aqui lista de tareas, ahora las ejecuto
 		
-		List<Future<String>> tareas = pool.invokeAll(lista);
-		for (Future<String> future : tareas) {
-			System.out.println(future.get());
-		}
+//		List<Future<String>> tareas = pool.invokeAll(lista);
+//		for (Future<String> future : tareas) {
+//			System.out.println(future.get());
+//		}
+		
+		String res = pool.invokeAny(lista);
+		System.out.println(res);
 		
 		pool.shutdown();
 		
