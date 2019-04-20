@@ -86,7 +86,9 @@ public class ejercicio1MergeSort extends RecursiveAction {
 	public static void main(String[] args) {
 		int[] array = generateRandomArray(SIZE);
 		System.out.println("Array: " + Arrays.toString(array));
-		ForkJoinPool.commonPool().invoke(new ejercicio1MergeSort(array));
+		ForkJoinPool pool = new ForkJoinPool();
+		pool.invoke(new ejercicio1MergeSort(array));
+//		ForkJoinPool.commonPool().invoke(new ejercicio1MergeSort(array));
 		System.out.println("Ordenado: " + Arrays.toString(array));
 	}
 }
