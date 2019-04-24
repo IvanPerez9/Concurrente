@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -162,12 +163,13 @@ public class EjerciciosPersonajes {
 	 * Implementa un método que imprima por pantalla por cada industria,
 	 * qué ocupaciones aparecen en el fichero -> Agrupar por industria
 	 */
-//	public void ejercicio9 () {
-//		this.personajes.parallelStream()
-//			.collect()
-//			.distinct();
-//			
-//	}
+	public void ejercicio9 () {
+		Map<String ,List<String>> mapa = this.personajes.parallelStream()
+				.collect(Collectors.groupingBy(Personajes::getIndustry , Collectors.mapping(Personajes::getOccupation, Collectors.toList())));
+		
+		System.out.println(mapa);
+			
+	}
 	
 	/*
 	 * Implementa un método que reciba como argumento una cadena de caracteres
@@ -213,6 +215,7 @@ public class EjerciciosPersonajes {
 		this.personajes.parallelStream()
 			.map(p -> p.getName())
 			.sorted(comparador)
+			//.sorted(Comparator.comparing(String::length))
 			.sequential()
 			.forEach(System.out::println); // Imprimir secuencial
 	}
@@ -229,9 +232,9 @@ public class EjerciciosPersonajes {
 		//ejercicios.ejercicio7();
 		//ejercicios.ejercicio8("Arts");
 		
-		// El 9 el formato de salida
+		 ejercicios.ejercicio9();
 		
-		ejercicios.ejercicios10("aba");
+		//ejercicios.ejercicios10("aba");
 		//ejercicios.ejercicio11(3);
 		//ejercicios.ejercicio13();
 	}

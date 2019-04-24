@@ -18,6 +18,7 @@ public class LectorEscritorCola {
 	private static Semaphore queueSem; // Semaforo de cola para resolver el problema
 	
 	// Tanto de escritores como de lectores. Asegura la entrada del escritor, usa un semaforo como "cola"
+	// Cuando hay un lector, compruba si hay un escritor escribiendo, si no hay entra
 	
 	private static void sleep(int bound) {
 		try {
