@@ -41,7 +41,6 @@ public class ProductorConsumidor {
 				sleep(1000);
 			}
 			System.out.println("El productor es " + product);
-			product = -1;
 			produced = false;
 		}
 	}

@@ -3,82 +3,53 @@
  */
 package Hoja2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.RecursiveTask;
-
-import HojaEjercicios2.ejercicio7Maximo;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * @author Ivan.Perez
  *
  *  https://github.com/IvanPerez9
  */
-public class Ejercicio7 extends RecursiveTask<Integer> {
+public class Ejercicio7 {
 
 	/*
-	 * Fork join -> encontar el maximo
+	 * Array de m elementos y N hilos, dividir el array en N partes y pasarle 1 a cada hilo
 	 */
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private static final int ELEM = 5;
-	private static final int SIZE = 10;
-	private int start ;
-	private int end ;
-	private int[] array ;
+	public static final int N = 4;
 	
-	public Ejercicio7(int start, int end, int[] array) {
-		super();
-		this.start = start;
-		this.end = end;
-		this.array = array;
-	}
-
-	public static int[] generateRandomArray (int size) {
-		int[] aux = new int[size];
-		Random rdn = new Random();
-		for (int i = 0; i < aux.length; i++) {
-			aux[i] = rdn.nextInt(size);
-		}
-		return aux;
-	}
-
-	@Override
-	protected Integer compute() {
-		if ((end - start) < ELEM) {
-			int max = Integer.MIN_VALUE; 
-			for (int i = 0; i < array.length; i++) {
-				max = Math.max(max, array[i]);
-			}
-			return max;
-		} else {
-			int mitad = (end+start) / 2;
-			
-			Ejercicio7 izq = new Ejercicio7(start, mitad, array);
-			Ejercicio7 der = new Ejercicio7(mitad, end, array);
-			
-			izq.fork();
-			int aux = der.compute();
-			
-			int salida = izq.join();
-			
-			int max = Math.max(aux, salida);
-			return max;
-		}
+	public static int maximoArray(int[] array) {
+		int max = Arrays.stream(array)
+				.max().getAsInt();
+		return max;
 	}
 	
-	public static void main(String[] args) {
-		int[] arrayMain = generateRandomArray(SIZE);
-		ForkJoinPool pool = new ForkJoinPool();
-		int m = pool.invoke(new ejercicio7Maximo(0, arrayMain.length, arrayMain));
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
+		int[] array = {1,20,3,4,7,9,4,10,45,30,20,1,33,21,5,6,7,4,6,18};
+		ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+		List<Future<Integer>> lista = new ArrayList<>();
 		
-		System.out.println(Arrays.toString(arrayMain));
-		System.out.println("Max: " + m);
+		int dividir = array.length / N ;
 		
+		for (int i = 0; i < array.length; i+=dividir) {
+			final int id = i;
+			Future<Integer> valor = pool.submit(() -> maximoArray(Arrays.copyOfRange(array, id, id+dividir)));
+			lista.add(valor);
+		}
+		
+		List<Integer> lista2 = new ArrayList<>();
+		for (Future<Integer> f : lista) {
+			lista2.add(f.get());
+		}
+		
+		System.out.println(Collections.max(lista2));
 		pool.shutdown();
 	}
 	
