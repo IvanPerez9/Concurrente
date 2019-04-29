@@ -18,7 +18,7 @@ public class LectorEscritorCola {
 	private static Semaphore queueSem; // Semaforo de cola para resolver el problema
 	
 	// Tanto de escritores como de lectores. Asegura la entrada del escritor, usa un semaforo como "cola"
-	// Cuando hay un lector, compruba si hay un escritor escribiendo, si no hay entra
+	// Cuando hay un lector, compruba si hay un escritor escribiendo, si no hay entra -> Cola
 	
 	private static void sleep(int bound) {
 		try {
@@ -71,7 +71,7 @@ public class LectorEscritorCola {
 	public static void main(String[] args) {
 		emResource = new Semaphore(1);
 		semReader = new Semaphore(1);
-		queueSem = new Semaphore(1); // Exclusion mutua permitidos 1
+		queueSem = new Semaphore(1); // Exclusion mutua permitidos 1 -> mira si hay escritores escribiendo, si no entra
 		readerCount = 0;
 		
 		for (int i = 0; i < 10; i++) {

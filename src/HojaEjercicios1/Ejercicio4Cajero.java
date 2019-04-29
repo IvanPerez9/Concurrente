@@ -4,10 +4,8 @@
 package HojaEjercicios1;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
-
-import org.jsoup.select.Evaluator.IsEmpty;
+import java.util.concurrent.locks.Lock;
 
 /**
  * @author Ivan.Perez
@@ -16,23 +14,35 @@ import org.jsoup.select.Evaluator.IsEmpty;
  */
 public class Ejercicio4Cajero {
 	
+	public class Cajero {
+		
+		protected int[] cobrados;
+
+		public Cajero(int[] cobrados) {
+			super();
+			this.cobrados = cobrados;
+		}
+		
+		public Cajero() {}
+
+		public int[] getCobrados() {
+			return cobrados;
+		}
+
+		public void setCobrados(int[] cobrados) {
+			this.cobrados = cobrados;
+		}
+	}
+	
 	private static Queue<Integer> clientesL;
+	private static Lock xLock;
 
 	public Ejercicio4Cajero() {
 		this.clientesL = new LinkedList<>();
 	}
 
-	public synchronized void cajero (int cliente) {
-		try {
-			Thread.sleep(1000);
-			while(clientesL.isEmpty()) {
-				this.wait();
-			}
-			clientesL.add(cliente);
-			System.out.println();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	public void cajero (int cliente) {
+		
 	}
 	
 }

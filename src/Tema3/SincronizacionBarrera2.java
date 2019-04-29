@@ -26,7 +26,7 @@ public class SincronizacionBarrera2 {
 	private static Semaphore sincronizacionBarrera;
 	private static Semaphore ExclusionMutua; 
 	
-	private static Semaphore semUnblock; // TODO DUDA doble comprobacion? Inanicion donde ? -> Para comprobar que salen todos, por si hay mas de una iteracion
+	private static Semaphore semUnblock; // DUDA doble comprobacion? Inanicion donde ? -> Para comprobar que salen todos, por si hay mas de una iteracion
 	
 	public static void proceso() throws InterruptedException {
 		System.out.println("A");

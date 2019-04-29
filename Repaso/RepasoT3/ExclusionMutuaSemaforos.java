@@ -15,6 +15,8 @@ public class ExclusionMutuaSemaforos {
 	/*
 	 * Garantizar que se realiza en un orden determinado un numero N de procesos.
 	 * Inicializamos a 1 el semaforo , ya que es seccion critica
+	 * 
+	 * El EMSemaphore garantiza que no se mezclan las secciones criticas -> DUDA TODO 
 	 */
 	
 	private static Semaphore semaforo;

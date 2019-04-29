@@ -10,18 +10,8 @@ import java.util.concurrent.Semaphore;
  *
  *  https://github.com/IvanPerez9
  */
-public class SincronizacionBarreraSemaforo {
+public class SincronizacionBarreraSemaforoWhile {
 
-	/*
-	 * Sincronizacion de barrera no es más que una condicional, pero esperan a que todos lleguen a un determinado punto
-	 */
-	
-	/*
-	 * Se desea implementar un bucle en el que todos los procesos muestran A y se esperan.
-	 * El ultimo proceso muestra * y desbloquea a los demás
-	 * Si se necesita usar una única barrera en un bucle, debe tenerse control de los desbloqueos de los procesos 
-	 */
-	
 	private static final int N = 5;
 	private static int nProc ;
 	
@@ -30,24 +20,25 @@ public class SincronizacionBarreraSemaforo {
 	
 	private static Semaphore out; // Comprobar que salen todos, por si hay mas iteraciones, no se intercalen las A
 	
-	
 	public static void proceso () throws InterruptedException {
-		System.out.println("A");
-		semnProc.acquire();
-		nProc++;
-		if (nProc < N) {
-			semnProc.release();
-			desbloqueo.acquire();
-			out.release();
-		} else {
-			System.out.println("*");
-			nProc = 0;
-			for (int i = 0; i < N -1; i++) {
-				desbloqueo.release();
-			}
-			for (int i = 0; i < N; i++) {
-				Thread.sleep(200);
-				out.acquire();
+		while(true) {
+			System.out.println("A");
+			semnProc.acquire();
+			nProc++;
+			if (nProc < N) {
+				semnProc.release();
+				desbloqueo.acquire();
+				out.release();
+			} else {
+				System.out.println("*");
+				nProc = 0;
+				for (int i = 0; i < N -1; i++) {
+					desbloqueo.release();
+				}
+				for (int i = 0; i < N; i++) {
+					Thread.sleep(200);
+					out.acquire();
+				}
 			}
 		}
 	}
@@ -56,6 +47,7 @@ public class SincronizacionBarreraSemaforo {
 		desbloqueo = new Semaphore(0); // Sincronizacion condicional -> Barrera
 		semnProc = new Semaphore(1); // Exclusion mutua
 		out = new Semaphore(1);
+		
 		for (int i = 0; i < N; i++) {
 			new Thread(() -> {
 				try {
@@ -66,4 +58,5 @@ public class SincronizacionBarreraSemaforo {
 			}, "Hilo" + (i+1)).start();
  		}
 	}
+	
 }

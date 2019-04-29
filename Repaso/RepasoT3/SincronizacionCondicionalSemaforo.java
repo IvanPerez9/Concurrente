@@ -13,7 +13,7 @@ import java.util.concurrent.Semaphore;
 public class SincronizacionCondicionalSemaforo {
 
 	/*
-	 * Dos metodos que pinten ciertas letras, el proceso 2 no puede pintar "PB2" hasta que el 1 haya pintado su "PB1"
+	 * Dos metodos que pinten ciertas letras, el proceso 2 no puede pintar "PB2" hasta que el 1 haya pintado su "PA1"
 	 * Al ser sincronizacionCondicional iniciamos el semaforo a 0
 	 */
 	
