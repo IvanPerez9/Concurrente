@@ -21,7 +21,7 @@ public class SincronizacionBarreraSemaforoWhile {
 	private static Semaphore out; // Comprobar que salen todos, por si hay mas iteraciones, no se intercalen las A
 	
 	public static void proceso () throws InterruptedException {
-		while(true) {
+			Thread.sleep(200);
 			System.out.println("A");
 			semnProc.acquire();
 			nProc++;
@@ -30,6 +30,7 @@ public class SincronizacionBarreraSemaforoWhile {
 				desbloqueo.acquire();
 				out.release();
 			} else {
+				Thread.sleep(2000);
 				System.out.println("*");
 				nProc = 0;
 				for (int i = 0; i < N -1; i++) {
@@ -40,7 +41,6 @@ public class SincronizacionBarreraSemaforoWhile {
 					out.acquire();
 				}
 			}
-		}
 	}
 	
 	public static void main(String[] args) {
@@ -51,6 +51,7 @@ public class SincronizacionBarreraSemaforoWhile {
 		for (int i = 0; i < N; i++) {
 			new Thread(() -> {
 				try {
+					Thread.sleep(1000);
 					proceso();
 				} catch (InterruptedException e) {
 					e.printStackTrace();

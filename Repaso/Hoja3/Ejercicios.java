@@ -9,9 +9,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -95,7 +95,7 @@ public class Ejercicios {
 	public void ejercicio5() {
 		Double n = this.personajes.parallelStream()
 			.map(m -> m.getViews())
-			.reduce(0.0 , Double::sum);
+			.reduce(0.0, Double::sum);
 		
 		System.out.println(n);
 	}
@@ -134,8 +134,8 @@ public class Ejercicios {
 	}
 	
 	public void ejercicio9 () {
-		Map<String ,List<String>> mapa = this.personajes.parallelStream()
-				.collect(Collectors.groupingBy(Objeto::getIndustry , Collectors.mapping(Objeto::getOccupation, Collectors.toList())));
+		Map<String, Set<String>> mapa = this.personajes.parallelStream()
+				.collect(Collectors.groupingBy(Objeto::getIndustry , Collectors.mapping(Objeto::getOccupation, Collectors.toSet())));
 		
 		System.out.println(mapa);
 			

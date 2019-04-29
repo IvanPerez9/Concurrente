@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -164,8 +165,8 @@ public class EjerciciosPersonajes {
 	 * qué ocupaciones aparecen en el fichero -> Agrupar por industria
 	 */
 	public void ejercicio9 () {
-		Map<String ,List<String>> mapa = this.personajes.parallelStream()
-				.collect(Collectors.groupingBy(Personajes::getIndustry , Collectors.mapping(Personajes::getOccupation, Collectors.toList())));
+		Map<String, Set<String>> mapa = this.personajes.parallelStream()
+				.collect(Collectors.groupingBy(Personajes::getIndustry , Collectors.mapping(Personajes::getOccupation, Collectors.toSet())));
 		
 		System.out.println(mapa);
 			
@@ -214,8 +215,8 @@ public class EjerciciosPersonajes {
 		Comparator<String> comparador =  (a,b) -> a.length() - b.length();
 		this.personajes.parallelStream()
 			.map(p -> p.getName())
-			.sorted(comparador)
-			//.sorted(Comparator.comparing(String::length))
+			//.sorted(comparador)
+			.sorted(Comparator.comparing(String::length))
 			.sequential()
 			.forEach(System.out::println); // Imprimir secuencial
 	}
@@ -231,12 +232,10 @@ public class EjerciciosPersonajes {
 		//ejercicios.ejercicio6("Military Personnel");
 		//ejercicios.ejercicio7();
 		//ejercicios.ejercicio8("Arts");
-		
-		 ejercicios.ejercicio9();
-		
+		//ejercicios.ejercicio9();
 		//ejercicios.ejercicios10("aba");
 		//ejercicios.ejercicio11(3);
-		//ejercicios.ejercicio13();
+		ejercicios.ejercicio13();
 	}
 	
 }
