@@ -16,6 +16,10 @@ public class EjercicioEDConcurrentesProdCons {
 	private static int SIZE = 5;
 	private static BlockingQueue<String> queue = new ArrayBlockingQueue<>(SIZE);
 	
+	/* 
+	 * 10 productores, producen 10 elementos cada
+	 */
+	
 	public static void productor (int id) {
 		try {
 			for (int i = 0; i < 10; i++) {
