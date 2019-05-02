@@ -1,14 +1,14 @@
 /**
  * 
  */
-package Hoja3;
+package EjerciciosRepaso;
 
 /**
  * @author Ivan.Perez
  *
  *  https://github.com/IvanPerez9
  */
-public class Objeto {
+public class Hoja3Objeto {
 
 	String name;
 	String sex;
@@ -24,7 +24,7 @@ public class Objeto {
 	Double average;
 	Double popularity;
 	
-	public Objeto(String name, String sex, String birht, String city, String country, String continent,
+	public Hoja3Objeto(String name, String sex, String birht, String city, String country, String continent,
 			String occupation, String industry, String domain, Double languajes, Double views, Double average,
 			Double popularity) {
 		super();

@@ -169,7 +169,7 @@ public class Ejercicios {
 		String path = "Resources/database.csv" ;
 		Ejercicios ejercicios = new Ejercicios(path);
 		
-		ejercicios.ejercicio13();
+		ejercicios.ejercicios10("ab");
 	}
 	
 }
