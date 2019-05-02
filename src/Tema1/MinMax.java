@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Introduccion_T1;
+package Tema1;
 
 /**
  * @date 31 ene. 2019

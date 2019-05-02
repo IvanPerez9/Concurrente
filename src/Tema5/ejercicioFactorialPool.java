@@ -4,10 +4,6 @@
 package Tema5;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -23,6 +19,7 @@ public class ejercicioFactorialPool {
 
 	/*
 	 * En este caso irá obteniendo los resultados segun vaya obteniendolos
+	 * Numero y valor del factorial
 	 */
 	
 	public static BigInteger factorial (int num) {
@@ -36,26 +33,32 @@ public class ejercicioFactorialPool {
 	
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-		int max = 1000000;
+		int max = 1000;
 		// Cambiarlo por un concurrent hashmap de integer y future big integer
 		ConcurrentHashMap<Integer, Future<BigInteger>> results = new ConcurrentHashMap<>();
 		for (int i = 0; i < max; i++) {
 			int n = i+1;
-			results.put(pool.submit(() -> factorial(n)));
+			results.put(n , pool.submit(() -> factorial(n)));
 		}
 		
 		// Aqui recorrer con getValues y el keySet()
-		while(!results.isEmpty()) {
-			for (Map.Entry<Integer,Future<BigInteger>> val : results.entrySet()) {
-				BigInteger result = val.getValue().get();
-			}
-			for (Future<BigInteger> future : results) {
-				if (future.isDone()) {
-					System.out.println(future.get());
-					results.remove(future);
-				}
-			}
+//		while(!results.isEmpty()) {
+//			for (Map.Entry<Integer,Future<BigInteger>> val : results.entrySet()) {
+//				BigInteger result = val.getValue().get();
+//			}
+//			for (Future<BigInteger> future : results.values()) {
+//				if (future.isDone()) {
+//					System.out.println(future.get());
+//					results.values().remove(future);
+//				}
+//			}
+//		}
+		
+		for (Integer i : results.keySet()) {
+			System.out.println(i + " -> " + results.get(i).get());
+			Thread.sleep(200);
 		}
+		
 		pool.shutdown();
 	}
 	
