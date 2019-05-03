@@ -18,7 +18,6 @@ import java.util.concurrent.Future;
  */
 public class Ejercicio9 {
 
-	private static final int SIZE = 10;
 	private static final int TMN = 5;
 	
 	public static int[] generaterArray (int size) {

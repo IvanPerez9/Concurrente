@@ -21,9 +21,9 @@ public class Ejercicio4 {
 	 * Elementos de valor igual a su indice
 	 */
 	
-	public static int valor (int array, int pos) {
-		if (array == pos) {
-			return pos;
+	public static int sonIguales (int pos, int num) {
+		if (pos == num) {
+			return num;
 		}
 		return 0;
 	}
@@ -33,10 +33,10 @@ public class Ejercicio4 {
 		ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 		List<Future<Integer>> lista = new ArrayList<>();
 		List<Integer> salida = new ArrayList<>();
-		
+				
 		for (int i = 0; i < array.length; i++) {
 			final int id = i;
-			Future<Integer> valor = pool.submit(() -> valor(array[id], id));
+			Future<Integer> valor = pool.submit(() -> sonIguales(array[id], id));
 			lista.add(valor);
 		}
 		
@@ -44,11 +44,14 @@ public class Ejercicio4 {
 			salida.add(f.get());
 		}
 		
+		System.out.print("[ ");
 		for (Integer i : salida) {
 			if (i != 0) {
 				System.out.print(i + " ");
 			}
 		}
+		System.out.print("]");
+		
 		
 		pool.shutdown();
 	}

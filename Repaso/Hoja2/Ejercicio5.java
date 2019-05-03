@@ -3,6 +3,8 @@
  */
 package Hoja2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,32 +21,38 @@ public class Ejercicio5 {
 	 * Primos en un rango
 	 */
 	
-	public static int primosRango (int ini , int end) {
-		int contador = 0;
-		for (int i = ini; i < end; i++) {
-			if (esPrimo(i)) {
-				contador++;
+	public static boolean esPrimo(int num) {
+		for (int i = 2; i < num; i++) {
+			if(num % i == 0) {
+				return false;
 			}
 		}
-		return contador;
-	}
-	
-	public static boolean esPrimo(int n) {
-	    for(int i=2;i<n;i++) {
-	        if(n%i==0)
-	            return false;
-	    }
-	    return true;
+		return true;
 	}
 	
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		ExecutorService pool = Executors.newCachedThreadPool();
-		int ini = 10;
-		int end = 500;
+		List<Future<Boolean>> lista = new ArrayList<>();
+		int contador = 0 ;
+		boolean valoraux = false;
 		
-		Future<Integer> contador = pool.submit(() -> primosRango(ini, end));
+		int[] array = {1,2,3,4,5,6,7,20,11,34,6456,23,6};
 		
-		System.out.println("Desde " + ini + " hasta " + end + " hay " + contador.get() + " numeros primos.");
+		for (int i = 0; i < array.length; i++) {
+			final int id = i;
+			Future<Boolean> valor = pool.submit(() -> esPrimo(array[id]));
+			lista.add(valor);
+		}
+		
+		for (Future<Boolean> f : lista) {
+			valoraux = f.get();
+			if (valoraux == true) {
+				contador++;
+			}
+		}
+		
+		System.out.println(contador);
 		pool.shutdown();
 	}
+	
 }

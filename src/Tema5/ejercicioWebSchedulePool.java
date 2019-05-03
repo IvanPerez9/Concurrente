@@ -38,7 +38,6 @@ public class ejercicioWebSchedulePool {
 		
 		pool.scheduleWithFixedDelay(() -> tarea("https://www.google.com/") , 0, 5, TimeUnit.SECONDS);
 		pool.scheduleWithFixedDelay(() -> tarea("https://www.noexistw94082.es/") , 0, 5, TimeUnit.SECONDS);
-		
 		pool.shutdown();
 	}
 }

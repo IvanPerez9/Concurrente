@@ -164,7 +164,6 @@ public class Ejercicios {
 		
 	}
 	
-	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		String path = "Resources/database.csv" ;
 		Ejercicios ejercicios = new Ejercicios(path);
