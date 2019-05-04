@@ -22,6 +22,8 @@ public class EjercicioMapaEDConcurrentes {
 
 	private static ConcurrentMap<String,String> duplicates= new ConcurrentHashMap<String,String>();
 	
+	private static Object screenLock = new Object(); // Ojo los accesos 
+	
 	public static void findDuplicates(File root) {
 		if (root.isDirectory()) {
 			for (File file : root.listFiles()) {
@@ -32,24 +34,36 @@ public class EjercicioMapaEDConcurrentes {
 					if(path == null){
 						duplicates.putIfAbsent(file.getName(), file.getAbsolutePath());
 					} else {
-						System.out.println("Found duplicate file: "+file.getName());
-						System.out.println(" "+path);
-						System.out.println(" "+file.getAbsolutePath());
+						synchronized (screenLock) {
+							System.out.println("Found duplicate file: "+file.getName());
+							System.out.println(" "+path);
+							System.out.println(" "+file.getAbsolutePath());
+						}
 					}
 				}
 			}
 		}
 	}
 		
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		List<Thread> ths = new ArrayList<Thread> ();
+		File root = new File(
+                ".");
+
+        File[] files = root.listFiles();
 		
 		for (int i = 0; i < args.length; i++) {
-			// Hasta el numero de carpetas ..
+			ths.add(new Thread (() -> findDuplicates(root)));
+			
 		}
 		
+		for (Thread th : ths) {
+			th.start();
+		}
+		for (Thread th : ths) {
+			th.join();
+		}
 		
-		findDuplicates(new File("X:\\Dir"));
 	}
 }
