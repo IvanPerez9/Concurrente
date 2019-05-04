@@ -1,7 +1,7 @@
 /**
  * 
  */
-package HojaEjercicios1;
+package Hoja1;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -15,8 +15,8 @@ import java.util.concurrent.Semaphore;
  *
  *  https://github.com/IvanPerez9
  */
-public class Ejercicio4Cajero {
-	
+public class Ejercicio4 {
+
 	/*
 	 * Una conocida marca de grandes almacenes está comenzando con su campaña 
 	 * de rebajas y ha habilitado una fila única para realizar los cobros. Modela el 
@@ -26,62 +26,58 @@ public class Ejercicio4Cajero {
 	 * procesados por cada cajero, para saber qué comisión deberá cobrar
 	 */
 	
-	private static Queue<Integer> cola; 
-	private static int [][] cajeroCliente; // Relacionar cliente con cajero
-	private static final int NPROC = 10;
-	private static Semaphore sem;
-	private static final int NCAJEROS = 3;
 	
-	/*
-	 * Proceso de obtener un cliente de la cola
-	 */
-	public static void proceso (int id , Queue<Integer> cola){
-		while (!cola.isEmpty()) {
+	private static Queue<Integer> cola ;
+	private static int NCLIENTES = 12;
+	private static int NCAJEROS = 3;
+	private static Semaphore sem;
+	private static int[][] cajeroCliente; // Almacen de cajero id , con cliente id
+	
+	
+	public static void proceso (int id, Queue<Integer> cola) {
+		while(!cola.isEmpty()) {
 			try {
 				sem.acquire();
-				System.out.println("Cliente: " + cola.size() + " proceso: " + id);
+				System.out.println("Cliente: " + cola.size() + " cajero " + id);
 				cola.remove();
-				cajeroCliente[id][0] += 1 ;
+				cajeroCliente[id][0] +=  1 ;
 				sem.release();
 				Thread.sleep(new Random().nextInt(2000));
-			}catch (InterruptedException e) {
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
-		cola = new LinkedList<>();
 		sem = new Semaphore(1);
-		List<Thread> lista = new ArrayList<>();
-		cajeroCliente = new int [3][2] ; // posicion 0 valor, posicion 1 el id cajero
+		cajeroCliente = new int[NCAJEROS][2] ; // Pos 0 valor, pos 1 el id
+		cola = new LinkedList<>();
+		List<Thread> ths = new ArrayList<>();
 		
-		for (int i = 0; i < NPROC; i++) {
+		for (int i = 0; i < NCLIENTES; i++) {
 			cola.add(i+1);
 		}
 		
 		for (int i = 0; i < NCAJEROS; i++) {
-			cajeroCliente[i][0] = 0;
-			cajeroCliente[i][1] = i;
-			
 			final int id = i;
+			cajeroCliente[i][0] = 0;
+			cajeroCliente[i][1] = id;
+			
 			Thread th = new Thread(() -> proceso(id, cola));
-			lista.add(th);
+			ths.add(th);
 		}
 		
-		for (Thread th : lista) {
+		for (Thread th : ths) {
 			th.start();
 		}
-		
-		for (Thread th : lista) {
+		for (Thread th : ths) {
 			th.join();
 		}
 		
 		for (int i = 0; i < NCAJEROS; i++) {
-			System.out.println("El cajero " + i + " ha cobrado: " + cajeroCliente[i][0] + " clientes.");
+			System.out.println("El cajero: " + i + " ha cobrado: " + cajeroCliente[i][0]+ " clientes");
 		}
-		
 	}
-	
 	
 }
