@@ -164,11 +164,23 @@ public class Ejercicios {
 		
 	}
 	
+	public void ejercicioPrueba() {
+		String prueba = this.personajes.parallelStream()
+			.filter(p -> p.getName().startsWith("A"))
+			.map(m -> m.getName())
+			.reduce(" " , (sum, m) -> sum += m.concat(", "));
+		
+		String[] array = prueba.trim().split(",") ;
+		for (String s : array) {
+			System.out.println(s);
+		}
+	}
+	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		String path = "Resources/database.csv" ;
 		Ejercicios ejercicios = new Ejercicios(path);
 		
-		ejercicios.ejercicios10("ab");
+		ejercicios.ejercicioPrueba();
 	}
 	
 }
