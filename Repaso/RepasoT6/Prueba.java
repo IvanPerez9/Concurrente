@@ -1,7 +1,7 @@
 /**
  * 
  */
-package RepasoT5;
+package RepasoT6;
 
 import java.util.function.Supplier;
 import java.util.stream.Stream;
