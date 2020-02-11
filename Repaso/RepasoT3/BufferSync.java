@@ -29,8 +29,8 @@ public class BufferSync {
         }
         emPExtract = new Semaphore(1);
         emPInsert = new Semaphore(1);
-        semNAvailable = new Semaphore(BUFFER_SIZE);
-        semNProducts = new Semaphore(0);
+        semNAvailable = new Semaphore(BUFFER_SIZE); // Limite de productos que soporta
+        semNProducts = new Semaphore(0); // Semaforo de que todos los productos salen y entran
     }
 
     public void insert(int d) {

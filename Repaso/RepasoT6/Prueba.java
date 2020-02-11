@@ -20,6 +20,7 @@ public class Prueba {
 			.mapToObj(i -> "a" + i)
 			.forEach(System.out::println);
 		
+		// Con Supplier puedo hacer varias operaciones finales
 		Supplier<Stream<String>> streamSupplier = () -> Stream.of("d2", "a2", "b1", "b3", "c")
 				.filter(s -> s.startsWith("a"));
 		
